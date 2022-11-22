@@ -1,10 +1,9 @@
-const { mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 
 const collageSchema = new mongoose.Schema({
     name:{
         type:String,
         required :true,
-        toloweCase :true,
         unique:true
     },
     fullName:{
@@ -21,4 +20,8 @@ const collageSchema = new mongoose.Schema({
     },
 },{ timestamps: true})
 
-module.exports = mongoose.model('collageDetails', collageSchema)
+// module.exports = mongoose.model('collegeDetails', collageSchema)  
+
+module.exports =  mongoose.model('CollageDetails', collageSchema);
+// module.exports = mongoose.model.CollageDetails || ('CollageDetails', collageSchema)
+// module.exports = mongoose.model.CollageDetails
