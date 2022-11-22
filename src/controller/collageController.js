@@ -16,7 +16,10 @@ const createCollege = async function (req, res) {
         if (typeof name !== "string" || name.trim().length === 0) {
             return res.status(400).send({ status: false, msg: "Name is not valid" })
         }
-        name = name.toLocaleLowerCase()
+        let uniqueName = await collegeModel.find({ name: name })
+        if (uniqueName[0])
+        { return res.status(409).send({ status: false, msg: "Name Already exists" }) }
+        college.name = name.toLowerCase()
         if (!fullName) {
             return res.status(400).send({ status: false, msg: "fullName field is required" })
         }
@@ -44,6 +47,7 @@ const getColleges = async (req, res) => {
 
     try {
         let data = req.query.collegeName
+        data = data.toLowerCase()
         if (!data) { return res.status(400).send({ status: false, message: "Please enter college name in URL" }) }
 
         let collegeData = await collegeModel.findOne({ name: data, isDeleted: false }).select({ isDeleted: 0, __v: 0 }).lean()

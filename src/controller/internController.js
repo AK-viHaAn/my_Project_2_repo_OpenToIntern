@@ -20,15 +20,16 @@ const createIntern = async function (req, res) {
 
         if (!mobile) 
         { return res.status(400).send({ status: false, msg: "mobile is mandatory" }) }
-
-        if (mobile.length < 10)
+        
+        
+        // console.log(mobile.length)
+        if (mobile.length != 10)
         { return res.status(400).send({ status: false, msg: "Mobile No. must be at least 10 characters" }) }
-
-
+        
         let uniqueMobile = await internModel.find({ mobile: mobile })
         if (uniqueMobile[0])
         { return res.status(409).send({ status: false, msg: "mobile number Already exists" }) }
-
+        
         if (!email) 
         { return res.status(400).send({ status: false, msg: "Email Id is mandatory" }) }
 
