@@ -4,6 +4,7 @@ const collegeModel = require('../model/collageModel')
 
 
 const createIntern = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin','*')
     let internData = req.body
     if(Object.keys(internData).length==0) return res.status(400).send({status:false,msg:"data is not present"})
     let name = req.body.name
@@ -21,7 +22,7 @@ const createIntern = async function (req, res) {
         if (!mobile) 
         { return res.status(400).send({ status: false, msg: "mobile is mandatory" }) }
         
-        
+          
         // console.log(mobile.length)
         if (mobile.length != 10)
         { return res.status(400).send({ status: false, msg: "Mobile No. must be at least 10 characters" }) }
